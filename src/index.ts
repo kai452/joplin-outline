@@ -73,14 +73,17 @@ joplin.plugins.register({
       await panels.setHtml(view, htmlText);
     }
 
+    // Settings
+    const autoUpdate = await settingValue('autoUpdate');
+
     await joplin.workspace.onNoteSelectionChange(() => {
       updateTocView();
     });
     await joplin.workspace.onNoteChange(() => {
-      updateTocView();
+        if (autoUpdate) { updateTocView(); }
     });
     await joplin.settings.onChange(() => {
-      updateTocView();
+        if (autoUpdate) { updateTocView(); }
     });
 
     await updateTocView();

@@ -23,6 +23,14 @@ export async function registerSettings() {
       public: true,
       label: 'Toggle Shortcut',
     },
+    autoUpdate: {
+      type: SettingItemType.Bool,
+      value: false,
+      description: 'Auto update permanently',
+      section: 'outline.settings',
+      public: true,
+      label: 'Auto Update',
+    },
     autoHide: {
       type: SettingItemType.Bool,
       value: false,
