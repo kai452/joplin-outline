@@ -103,12 +103,32 @@ joplin.plugins.register({
         }
       },
     });
+    // Command: favsToggleAutoUpdate
+    // Desc: Toggle AutoUpdate
+    await joplin.commands.register(
+      {
+      name: 'toggleAutoUpdate',
+      label: 'Toggle AutoUpdate',
+      iconName: 'fas fa-refresh',
+      execute: async () => {
+        await settingValue('autoUpdate');
+        const autoUpdate = !await settingValue('autoUpdate');
+        await joplin.settings.setValue('autoUpdate', autoUpdate);
+      }
+    });
+
     await joplin.views.toolbarButtons.create('toggleOutline', 'toggleOutline', ToolbarButtonLocation.NoteToolbar);
+    await joplin.views.toolbarButtons.create('toggleAutoUpdate', 'toggleAutoUpdate', ToolbarButtonLocation.NoteToolbar);
     await joplin.views.menus.create('outlineMenu', 'Outline', [
       {
         label: 'toggleOutline',
         commandName: 'toggleOutline',
         accelerator: await settingValue('toggleShortcut'),
+      },
+      {
+        label: 'toggleAutoUpdate',
+        commandName: 'toggleAutoUpdate',
+        accelerator: await settingValue('autoUpdate'),
       },
     ]);
   },
